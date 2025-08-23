@@ -1,7 +1,7 @@
 {
-  "name": "Shema Server",
+  "name": "Awais Server",
   "version": "1.0.0",
-  "description": "Test Server for SHEMA",
+  "description": "Test Server for Awais",
   "proxy": "http://localhost:3000/1 ",
   "main": "server.js",
   "scripts": {
@@ -11,6 +11,8 @@
   "author": "Bereket Lemma",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.11.0",
+    "axois": "^0.0.1-security",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
