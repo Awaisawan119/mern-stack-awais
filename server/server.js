@@ -1,25 +1,75 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
+const mongoose = require("mongoose");
 const connectDB = require("./config/db");
+const path = require("path");
+
+// Only load dotenv in development
+if (process.env.NODE_ENV !== 'production') {
+  require("dotenv").config();
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// middlewares
+// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
 
-// connect to MongoDB
+// Serve public folder at /public
+app.use("/public", express.static(path.join(__dirname, "public")));
+
+// Debug: Check environment variables
+console.log("Environment variables:");
+console.log("PORT:", process.env.PORT);
+console.log("MONGO_URI:", process.env.MONGO_URI ? "*** loaded ***" : "NOT FOUND");
+console.log("NODE_ENV:", process.env.NODE_ENV);
+
+// Connect to MongoDB
 connectDB();
 
-// routes
+// Routes
 app.use('/api/items', require("./routes/items"));
 app.use('/api/payment', require("./routes/payment"));
 
-// start server
+// Health check endpoint
+app.get('/health', (req, res) => {
+  const dbStatus = mongoose.connection.readyState;
+  let status = 'unknown';
+
+  switch(dbStatus) {
+    case 0: status = 'disconnected'; break;
+    case 1: status = 'connected'; break;
+    case 2: status = 'connecting'; break;
+    case 3: status = 'disconnecting'; break;
+  }
+
+  res.json({ 
+    status: 'OK',
+    database: status,
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Server is running!',
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+  });
+});
+
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`🌐 Health check available at: http://localhost:${PORT}/health`);
+});
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  await mongoose.connection.close();
+  console.log('📴 MongoDB connection closed gracefully');
+  process.exit(0);
 });

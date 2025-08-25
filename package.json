@@ -1,7 +1,7 @@
 {
-  "name": "shema",
+  "name": "Awais",
   "version": "1.0.0",
-  "description": "Shema MERN Stack Ecommerce application",
+  "description": "Awais MERN Stack Ecommerce application",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Bereky/shema-mern-ecommerce/issues"
   },
-  "homepage": "https://github.com/Bereky/shema-mern-ecommerce#readme"
+  "homepage": "https://github.com/Bereky/shema-mern-ecommerce#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.7",
+    "react-bootstrap": "^2.10.10"
+  }
 }
