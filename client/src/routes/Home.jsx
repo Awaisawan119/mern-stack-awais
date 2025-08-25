@@ -11,7 +11,7 @@ const Home = () => {
     TabTitle("Home");
 
     useEffect(() => {
-        axios.get("https://mern-stack-awais.vercel.app/api/items")
+        axios.get("https://mernstackbackend-production-b925.up.railway.app/api/items")
             .then(res => setFeaturedItems(res.data))
             .catch(err => console.log(err))
 

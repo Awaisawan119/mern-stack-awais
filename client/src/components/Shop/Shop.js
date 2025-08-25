@@ -13,7 +13,7 @@ const Shop = () => {
     const [ loading , setLoading ] = useState(true) 
 
     useEffect(() => {
-        axios.get("https://mern-stack-awais.vercel.app/api/items")
+        axios.get("https://mernstackbackend-production-b925.up.railway.app/api/items")
             .then(res => {
                 setMenItems(res.data.filter((item) => item.category === "men"))
                 setKidsItems(res.data.filter((item) => item.category === "kids" ))

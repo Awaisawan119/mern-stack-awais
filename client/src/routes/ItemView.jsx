@@ -11,7 +11,7 @@ const ProductView = (props) => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        axios.get("https://mern-stack-awais.vercel.app/api/items")
+        axios.get("https://mernstackbackend-production-b925.up.railway.app/api/items")
             .then(res => {
                 setItem(res.data.filter((item) => item._id === param.id))
                 setLoading(false)
