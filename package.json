@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Bereky/shema-mern-ecommerce#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "bootstrap": "^5.3.7",
+    "jsonwebtoken": "^9.0.2",
     "react-bootstrap": "^2.10.10"
   }
 }

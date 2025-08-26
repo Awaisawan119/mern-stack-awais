@@ -1,0 +1,5 @@
+# Auto normalize line endings
+* text=auto
+
+# Keep specific files LF
+*.sh text eol=lf
